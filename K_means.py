@@ -83,8 +83,8 @@ def novoCentroide(lst):                                         # recebe uma lis
     i = 0
     while i < len(lst):
         try:
-            m = sum(lst[i])/len(lst[i])
-        except ZeroDivisionError:                               # caso o tamanho da lista seja 0 
+            m = sum(lst[i])/len(lst[i])                         # calcula a média.
+        except ZeroDivisionError:                               # caso o tamanho da lista seja 0 .
             m = sum(lst[i])/1
         medias.append(round(m,3))
         i+=1
