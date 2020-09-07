@@ -35,38 +35,14 @@ def converte_para_float(arquivo):
     return lst4
 
 
-# b)
-def distEuclidiana(x,y,n):                              #n = numero de atributos
-    """
-    parâmetro 1: lista
-    parâmetro 2: lista 
-    parâmetro 3: inteiro
-
-    return : float
-    """
+def distMinkowski(x,y,n,r=1):
     k = 0 
     acc = 0
     while k < n:
-        acc += ((x[k] - y[k])**2)
+        acc += (abs(x[k] - y[k]))**r
         k+=1
-    dist = math.sqrt(acc)
-    return round(dist,3)
-
-
-def distManhattan(x,y,n):
-    """
-    parâmetro 1: lista
-    parâmetro 2: lista 
-    parâmetro 3: inteiro
-
-    return : float
-    """
-    k = 0
-    dist = 0
-    while k < n:
-        dist += abs(x[k]-y[k])
-        k+=1
-    return round(dist,3)
+    dist = acc**(1/r)
+    return round(dist,3) 
 
 
 #c)
@@ -83,7 +59,7 @@ def calculoDist(arquivo,op = 1):
         while i < len(lst):     
             j = 0
             while j < len(lst):
-                lst1.append(distEuclidiana(lst[i],lst[j],atributos))        
+                lst1.append(distMinkowski(lst[i],lst[j],atributos,2))        
                 j+=1                       
             lstAux = lst1.copy()
             lst2.append(lstAux)
@@ -94,7 +70,7 @@ def calculoDist(arquivo,op = 1):
         while i < len(lst):     
             j = 0
             while j < len(lst):
-                lst1.append(distManhattan(lst[i],lst[j],atributos))        
+                lst1.append(distMinkowski(lst[i],lst[j],atributos,1))        
                 j+=1       
             lstAux = lst1.copy()
             lst2.append(lstAux)
