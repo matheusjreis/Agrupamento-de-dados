@@ -91,7 +91,7 @@ def novoCentroide(lst):                                         # recebe uma lis
     return medias
 
 
-def PosMaisProxima(elem,lstCentros):                            # recebe um elemento e uma lista de centroídes e verifica qual a centróide
+def posMaisProxima(elem,lstCentros):                            # recebe um elemento e uma lista de centroídes e verifica qual a centróide
     menor = distEuclidiana([elem],[lstCentros[0]],1)            # mais próxima desse elemento e retorna a posição dessa centróide.
     pos = 0
 
@@ -104,7 +104,7 @@ def PosMaisProxima(elem,lstCentros):                            # recebe um elem
     return pos                                                  # retorna a posição do centro mais próximo
 
 
-def K_means(lst, k):
+def k_means(lst, k):
     lst2 = list()                                                
     lstCentroides = list()                                         # armazena todas as listas de centróides em uma lista.                                              
 
@@ -121,7 +121,7 @@ def K_means(lst, k):
     aux+=1
 
     for elem in lst:
-        lst2[PosMaisProxima(elem,lst1)].append(elem)
+        lst2[posMaisProxima(elem,lst1)].append(elem)
     
     j = 0
     while j < 100:
@@ -135,7 +135,7 @@ def K_means(lst, k):
             i+=1
 
         for elem in lst:
-            lst2[PosMaisProxima(elem,lst1)].append(elem)
+            lst2[posMaisProxima(elem,lst1)].append(elem)
 
 
         if(lstCentroides[aux] == lstCentroides[aux-1]):                  # Verifica se as centróides se repetem, logo, convergiu.
@@ -150,6 +150,6 @@ lstAux = converte_para_float(arquivo)
 
 lst = unifica_lista(lstAux)
 
-lst1 = K_means(lst,k)
+lst1 = k_means(lst,k)
 
 escreve_arquivo(lst1)
