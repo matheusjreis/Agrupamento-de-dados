@@ -44,7 +44,7 @@ def converte_para_float(arquivo):                               # converte a lis
     return lst4
 
 
-def distEuclidiana(x,y,n):                                      # n = numero de atributos
+def distancia_euclidiana(x,y,n):                                      # n = numero de atributos
     """
     parâmetro 1: lista
     parâmetro 2: lista 
@@ -68,7 +68,7 @@ def unifica_lista(lst):                                         # Transforma uma
     return lstAux
 
 
-def centroideInicial(lst,k):                                    # escolhe as centróides aleatóriamente entre os objetos da base de dados
+def centroide_inicial(lst,k):                                    # escolhe as centróides aleatóriamente entre os objetos da base de dados
     i = 0   
     centro = list()
     while i < k:
@@ -78,7 +78,7 @@ def centroideInicial(lst,k):                                    # escolhe as cen
     return centro                                               # retorna uma lista de listas com as centróides
 
 
-def novoCentroide(lst):                                         # recebe uma lista de listas
+def novo_centroide(lst):                                         # recebe uma lista de listas
     medias = list()
     i = 0
     while i < len(lst):
@@ -91,14 +91,14 @@ def novoCentroide(lst):                                         # recebe uma lis
     return medias
 
 
-def posMaisProxima(elem,lstCentros):                            # recebe um elemento e uma lista de centroídes e verifica qual a centróide
-    menor = distEuclidiana([elem],[lstCentros[0]],1)            # mais próxima desse elemento e retorna a posição dessa centróide.
+def pos_mais_proxima(elem,lstCentros):                            # recebe um elemento e uma lista de centroídes e verifica qual a centróide
+    menor = distancia_euclidiana([elem],[lstCentros[0]],1)            # mais próxima desse elemento e retorna a posição dessa centróide.
     pos = 0
 
     i = 0
     while i < len(lstCentros):                            
-        if((distEuclidiana([elem],[lstCentros[i]],1))< menor):
-            menor = (distEuclidiana([elem],[lstCentros[i]],1))
+        if((distancia_euclidiana([elem],[lstCentros[i]],1))< menor):
+            menor = (distancia_euclidiana([elem],[lstCentros[i]],1))
             pos = i
         i+=1
     return pos                                                  # retorna a posição do centro mais próximo
@@ -115,17 +115,17 @@ def k_means(lst, k):
         lst2.append([])
         i+=1
     
-    lst1 = centroideInicial(lst,k)
+    lst1 = centroide_inicial(lst,k)
 
     lstCentroides.append(lst1)
     aux+=1
 
     for elem in lst:
-        lst2[posMaisProxima(elem,lst1)].append(elem)
+        lst2[pos_mais_proxima(elem,lst1)].append(elem)
     
     j = 0
     while j < 100:
-        lst1 = novoCentroide(lst2)
+        lst1 = novo_centroide(lst2)
         lstCentroides.append(lst1)
         lst2.clear()
         i = 0
@@ -135,7 +135,7 @@ def k_means(lst, k):
             i+=1
 
         for elem in lst:
-            lst2[posMaisProxima(elem,lst1)].append(elem)
+            lst2[pos_mais_proxima(elem,lst1)].append(elem)
 
 
         if(lstCentroides[aux] == lstCentroides[aux-1]):                  # Verifica se as centróides se repetem, logo, convergiu.
