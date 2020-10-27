@@ -45,7 +45,6 @@ def distMinkowski(x,y,n,r=1):
     return round(dist,3) 
 
 
-#c)
 def calculoDist(arquivo,op = 1):
     lst = converte_para_float(arquivo).copy()
     lst1 = list()
@@ -79,10 +78,11 @@ def calculoDist(arquivo,op = 1):
         return lst2
 
 
-#d)
 def escreve_distancia(arquivo):
     lst = calculoDist(arquivo,op)
     escreve_arquivo(lst)
 
+def main():
+    escreve_distancia(arquivo)
 
-escreve_distancia(arquivo)
+main()
